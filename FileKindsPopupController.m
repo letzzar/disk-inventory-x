@@ -72,7 +72,7 @@
 	[arrangedObjects sortUsingDescriptors: [self sortDescriptors]];
 
 	unsigned totalFileCount = 0;
-	unsigned i = [arrangedObjects count];
+	NSUInteger i = [arrangedObjects count];
 	while ( i-- )
 		totalFileCount += [(FileKindStatistic*) [arrangedObjects objectAtIndex: i] fileCount];
 			
@@ -189,7 +189,7 @@
 			//set image in menu item
 			[menuItem setImage: image];
 			
-			NSString *title = [[stat kindName] stringByAppendingFormat: @"  (%u)", [stat fileCount]];
+			NSString *title = [[stat kindName] stringByAppendingFormat: @"  (%lu)", (unsigned long) [stat fileCount]];
 			[menuItem setTitle: title];
 		}
 	}

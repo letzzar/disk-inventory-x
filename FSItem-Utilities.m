@@ -52,7 +52,7 @@
 		return nil; //path defines no child
 	
 	//get relative child path (relative to self)
-	unsigned childPathStartIndex = [myPath length];
+	NSUInteger childPathStartIndex = [myPath length];
 	if ( ![myPath isEqualToString: NSOpenStepRootDirectory()] ) // should just be @"/"
 		childPathStartIndex++;
 	

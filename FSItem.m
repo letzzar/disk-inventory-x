@@ -16,7 +16,6 @@
 
 #import "FSItem.h"
 #import "NSURL-Extensions.h"
-#import <OmniFoundation/NSMutableArray-OFExtensions.h>
 #import "NTFilePasteboardSource.h"
 
 //for debugging and logging purposes
@@ -307,7 +306,7 @@ NSString* FSItemLoadingFailedException = @"FSItemLoadingFailedException";
 		return nil;
 }
 
-- (FSItem*) childAtIndex: (unsigned) index
+- (FSItem*) childAtIndex: (NSUInteger) index
 {
 	if ( ![self isSpecialItem] )
 		return [_childs objectAtIndex: index];
@@ -315,7 +314,7 @@ NSString* FSItemLoadingFailedException = @"FSItemLoadingFailedException";
 		return nil;
 }
 
-- (unsigned) childCount
+- (NSUInteger) childCount
 {
 	if ( ![self isSpecialItem] )
 		return [_childs count];
@@ -415,7 +414,7 @@ NSString* FSItemLoadingFailedException = @"FSItemLoadingFailedException";
 		case FileFolderItem:
 			if ( [self isFolder] )
 			{
-				unsigned i = [_childs count];
+				NSUInteger i = [_childs count];
 				while ( i-- )
 				{
 					FSItem *child = [_childs objectAtIndex: i];
@@ -590,7 +589,7 @@ NSString* FSItemLoadingFailedException = @"FSItemLoadingFailedException";
     //let our childs do the same
 	if ( includingChildren && [self isFolder] )
 	{
-		unsigned i = [self childCount];
+		NSUInteger i = [self childCount];
 		while ( i-- )
 			[[self childAtIndex: i] setKindStringIncludingChildren: YES];
 	}

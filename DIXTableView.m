@@ -35,7 +35,7 @@
     {
 		//get context menu
         NSMenu *contextMenu = nil;
-		if ( [delegate respondsToSelector:@selector(tableView:menuForTableColumn:item:)] )
+		if ( [delegate respondsToSelector:@selector(tableView:menuForTableColumn:row:)] )
 		{
 			NSTableColumn *column = [[self tableColumns] objectAtIndex: columnIndex];
 			contextMenu = [delegate tableView:self menuForTableColumn: column row: rowIndex];

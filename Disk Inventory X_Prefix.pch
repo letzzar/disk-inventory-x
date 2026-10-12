@@ -6,7 +6,7 @@
     #import <Cocoa/Cocoa.h>
     #import <Carbon/Carbon.h>
 
-    #import <OmniBase/OmniBase.h>
+    #import "NSFoundation-DIXExtensions.h"
 
 
 	//global variable which enables/disables logging

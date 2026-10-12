@@ -1,0 +1,7 @@
+build/
+dist/
+build.log
+run.log
+xcuserdata/
+.DS_Store
+CLAUDE.md

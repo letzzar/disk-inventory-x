@@ -57,7 +57,7 @@ BOOL g_EnableLogging;
 	*/
 }
 
-- (void) openPanelDidEnd:(NSOpenPanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+- (void) openPanelDidEnd:(NSOpenPanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	if ( returnCode == NSModalResponseOK )
 	{

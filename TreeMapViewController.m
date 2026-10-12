@@ -126,7 +126,7 @@
 {
     FSItem *fsItem = ( item == nil ? [self rootItem] : item );
 
-    unsigned childCount = [fsItem childCount];
+    unsigned childCount = (unsigned) [fsItem childCount];
 	
 	//items representing other space and free space
 	if ( fsItem == [self rootItem] )

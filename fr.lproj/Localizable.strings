@@ -100,3 +100,9 @@
 "Mount Point:" = "Point de montage:";
 "Device:" = "Volume BSD:";
 " items" = " éléments";
+
+/* preferences window */
+"Restore Defaults" = "Rétablir les valeurs par défaut";
+"Restore the default settings of \"%@\"?" = "Rétablir les réglages par défaut de « %@ » ?";
+"The settings shown on this page will be set to their default values." = "Les réglages de cette page vont reprendre leurs valeurs par défaut.";
+"Cancel" = "Annuler";

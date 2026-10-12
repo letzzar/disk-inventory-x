@@ -14,13 +14,21 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <OmniAppKit/OAPreferenceController.h>
+#import "PrefsPageBase.h"
 
-
-@interface PrefsPanelController : OAPreferenceController {
-
+// Preferences window (replaces OmniAppKit's OAPreferenceController).
+// The pages are declared in the "DIXPreferencePages" dictionary of Info.plist.
+@interface PrefsPanelController : NSWindowController <NSToolbarDelegate, NSWindowDelegate>
+{
+	NSArray<PrefsPageBase*> *_pages;
+	PrefsPageBase *_currentPage;
+	NSView *_pageContainer;
+	NSButton *_restoreDefaultsButton;
 }
 
 + (PrefsPanelController*) sharedPreferenceController;
+
+- (IBAction) showPreferencesPanel: (id) sender;
+- (IBAction) restoreDefaults: (id) sender;
 
 @end

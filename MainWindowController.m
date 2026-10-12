@@ -21,11 +21,10 @@
 #import "FSItem-Utilities.h"
 #import "FileSizeTransformer.h"
 #import "AppsForItem.h"
-#import <OmniFoundation/NSString-OFExtensions.h>
 #import "NSURL-Extensions.h"
 
 @interface MainWindowController(Private)
-- (void) moveToTrashSheetDidDismiss: (NSWindow*) sheet returnCode: (int) returnCode contextInfo: (void*) contextInfo;
+- (void) moveToTrashSheetDidDismiss: (NSWindow*) sheet returnCode: (NSInteger) returnCode contextInfo: (void*) contextInfo;
 @end
 
 @implementation MainWindowController
@@ -466,7 +465,7 @@
 
 #pragma mark -----------------Toolbar support---------------------
 
-//used by OAToolbarWindowController to load the toolbar configuration file (.toolbar)
+//used by ToolbarWindowController to load the toolbar configuration file (.toolbar)
 - (NSString *)toolbarConfigurationName;
 {
     return @"MainWindowToolbar";
@@ -558,7 +557,7 @@
 	}
 	
 	//remove any supernumerary menu items (removed all items if is there is no app which can open this file)
-	unsigned removeMenuItemsFromIndex = ([apps defaultAppURL] != nil) ? [[apps additionalAppURLs] count] +2 : 0;
+	NSUInteger removeMenuItemsFromIndex = ([apps defaultAppURL] != nil) ? [[apps additionalAppURLs] count] +2 : 0;
 	
 	while ( ((unsigned) [_openWithSubMenu numberOfItems]) > removeMenuItemsFromIndex )
 		[_openWithSubMenu removeItemAtIndex: [_openWithSubMenu numberOfItems] -1];
@@ -602,7 +601,7 @@
 @implementation MainWindowController(Private)
 
 - (void) moveToTrashSheetDidDismiss: (NSWindow *) sheet
-						 returnCode: (int) returnCode
+						 returnCode: (NSInteger) returnCode
 						contextInfo: (void*) contextInfo
 {
 	if ( returnCode != NSAlertAlternateReturn )

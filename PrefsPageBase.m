@@ -14,55 +14,96 @@
 //
 
 #import "PrefsPageBase.h"
-#import <OmniFoundation/OFNull.h>
 
 @implementation PrefsPageBase
 
-- (void)restoreDefaultsNoPrompt;
+- (instancetype) initWithDescription: (NSDictionary*) description
 {
-    [super restoreDefaultsNoPrompt];
-#pragma warning "code diabled"
-    /*
-	//the preferences shown in each page must be declared in info.plist proberly!
-	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-	
-    unsigned int preferenceIndex = [preferences count];
-    while (preferenceIndex--)
+	self = [super init];
+	if ( self != nil )
 	{
-        NSString *aKey = [[preferences objectAtIndex: preferenceIndex] key];
+		_description = [description copy];
 		
-		//removeObjectForKey isn't Key-Value-Observing (KVO) compliant,
-		//so make sure all observers get notified
-		[prefs willChangeValueForKey: aKey];
-		[prefs removeObjectForKey: aKey];
-		[prefs didChangeValueForKey: aKey];
+		NSArray *topLevelObjects = nil;
+		if ( ![[NSBundle mainBundle] loadNibNamed: [_description objectForKey: @"nib"] owner: self topLevelObjects: &topLevelObjects] )
+		{
+			[self release];
+			return nil;
+		}
+		_topLevelObjects = [topLevelObjects retain];
+		
+		NSAssert1( controlBox != nil, @"preferences page '%@' has no control box", [self identifier] );
 	}
-     */
+	return self;
 }
 
-- (BOOL)haveAnyDefaultsChanged;
+- (void) dealloc
 {
-    return [super haveAnyDefaultsChanged];
-#pragma warning "code diabled"
-/*
-    //the preferences shown in each page and their default values must be declared in info.plist proberly!
- 	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+	[_description release];
+	[_topLevelObjects release];
+	
+	[super dealloc];
+}
+
+- (NSString*) identifier
+{
+	return [_description objectForKey: @"identifier"];
+}
+
+- (NSString*) title
+{
+	return [[NSBundle mainBundle] localizedStringForKey: [_description objectForKey: @"title"] value: nil table: @"Preferences"];
+}
+
+- (NSImage*) icon
+{
+	return [NSImage imageNamed: [_description objectForKey: @"icon"]];
+}
+
+- (NSView*) controlBox
+{
+	return controlBox;
+}
+
+- (NSView*) initialFirstResponder
+{
+	return initialFirstResponder;
+}
+
+- (NSArray<NSString*>*) defaultsKeys
+{
+	NSArray *keys = [_description objectForKey: @"defaultsArray"];
+	return keys == nil ? [NSArray array] : keys;
+}
+
+- (void) restoreDefaultsNoPrompt
+{
+	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+	
+	for ( NSString *key in [self defaultsKeys] )
+	{
+		//make sure all observers of the key get notified
+		[prefs willChangeValueForKey: key];
+		[prefs removeObjectForKey: key];
+		[prefs didChangeValueForKey: key];
+	}
+}
+
+- (BOOL) haveAnyDefaultsChanged
+{
+	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 	NSDictionary *defaultValues = [prefs volatileDomainForName: NSRegistrationDomain];
 	
-    unsigned int preferenceIndex = [preferences count];
-    while (preferenceIndex--)
+	for ( NSString *key in [self defaultsKeys] )
 	{
-        NSString *key = [[preferences objectAtIndex: preferenceIndex] key];
-		
 		id defValue = [defaultValues objectForKey: key];
 		id prefValue = [prefs objectForKey: key];
 		
-		if ( OFNOTEQUAL( prefValue, defValue ) )
+		if ( defValue != prefValue && ![defValue isEqual: prefValue] )
 			return YES;
 	}
 	
 	return NO;
- */
 }
 
 @end

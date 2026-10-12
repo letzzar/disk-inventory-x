@@ -14,7 +14,6 @@
 //
 
 #import "FSItemIndex.h"
-#import <OmniFoundation/NSString-OFExtensions.h>
 
 @interface NSMutableDictionary(Indexing)
 - (void) addObject: (id) object forTerm: (id) term; 
@@ -132,7 +131,7 @@
 
 - (void) addItemsFromArray: (NSArray*) items
 {
-	unsigned int i = [items count];
+	NSUInteger i = [items count];
 	
 	NSAutoreleasePool *localPool = (i > 200) ? [[NSAutoreleasePool alloc] init] : nil;
 	

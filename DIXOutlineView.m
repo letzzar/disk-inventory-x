@@ -20,7 +20,7 @@
 // return the selected item
 - (id) selectedItem
 {
-    int row = [self selectedRow];
+    NSInteger row = [self selectedRow];
     return row >= 0 ? [self itemAtRow: row] : nil;
 }
 

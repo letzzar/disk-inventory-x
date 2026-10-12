@@ -3,10 +3,10 @@
 #import <Cocoa/Cocoa.h>
 #import "FileSystemDoc.h"
 #import <TreeMapView/TreeMapView.h>
-#import "OAToolbarWindowControllerEx.h"
-#import <OmniAppKit/OASplitView.h>
+#import "ToolbarWindowController.h"
+#import "OASplitView.h"
 
-@interface MainWindowController : OAToolbarWindowControllerEx
+@interface MainWindowController : ToolbarWindowController
 {
     IBOutlet NSDrawer *_kindsDrawer;
     IBOutlet NSDrawer *_selectionListDrawer;

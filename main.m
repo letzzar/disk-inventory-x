@@ -18,5 +18,13 @@
 
 int main(int argc, const char *argv[])
 {
+    @autoreleasepool
+    {
+        //default values of the user defaults are declared in Info.plist
+        NSDictionary *defaults = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"DIXDefaults"];
+        if ( defaults != nil )
+            [[NSUserDefaults standardUserDefaults] registerDefaults: defaults];
+    }
+    
     return NSApplicationMain(argc, argv);
 }

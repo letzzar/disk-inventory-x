@@ -14,7 +14,34 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <OmniAppKit/OAPreferenceClient.h>
 
-@interface PrefsPageBase : OAPreferenceClient
+// One page of the preferences window (replaces OmniAppKit's OAPreferenceClient).
+// The page is the owner of its nib; the nib connects the outlets below.
+// The controls are bound to the shared NSUserDefaultsController.
+@interface PrefsPageBase : NSObject
+{
+	IBOutlet NSView *controlBox;
+	IBOutlet NSView *initialFirstResponder;
+	IBOutlet NSView *lastKeyView;
+	
+	NSDictionary *_description;
+	NSArray *_topLevelObjects;
+}
+
+// "description" is the page's entry in the "DIXPreferencePages" dictionary of Info.plist
+- (instancetype) initWithDescription: (NSDictionary*) description;
+
+- (NSString*) identifier;
+- (NSString*) title; //localized
+- (NSImage*) icon;
+
+- (NSView*) controlBox;
+- (NSView*) initialFirstResponder;
+
+// user defaults keys shown by this page ("defaultsArray" in Info.plist)
+- (NSArray<NSString*>*) defaultsKeys;
+
+- (void) restoreDefaultsNoPrompt;
+- (BOOL) haveAnyDefaultsChanged;
+
 @end

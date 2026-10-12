@@ -98,3 +98,9 @@
 "Mount Point:" = "Mount Point:";
 "Device:" = "Device:";
 " items" = " items";
+
+/* preferences window */
+"Restore Defaults" = "Restore Defaults";
+"Restore the default settings of \"%@\"?" = "Restore the default settings of \"%@\"?";
+"The settings shown on this page will be set to their default values." = "The settings shown on this page will be set to their default values.";
+"Cancel" = "Cancel";

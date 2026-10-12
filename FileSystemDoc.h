@@ -37,7 +37,7 @@
 - (NSString*) kindName;
 - (NSString*) description;
 
-- (unsigned) fileCount;		//# of files of this kind
+- (NSUInteger) fileCount;		//# of files of this kind
 - (unsigned long long) size; //sum of sizes of files of this kind
 - (void) recalculateSize;
 

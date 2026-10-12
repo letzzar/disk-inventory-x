@@ -17,7 +17,6 @@
 #import "FilesOutlineViewController.h"
 #import "FSItem.h"
 #import "FSItem-Utilities.h"
-#import <OmniAppKit/NSTableView-OAExtensions.h>
 #import "MainWindowController.h"
 #import "Preferences.h"
 
@@ -99,7 +98,7 @@
 
 #pragma mark --------NSOutlineView datasource-----------------
 
-- (id) outlineView: (NSOutlineView *) outlineView child: (int) index ofItem: (id) item
+- (id) outlineView: (NSOutlineView *) outlineView child: (NSInteger) index ofItem: (id) item
 {
 	FSItem *fsItem = (item == nil) ? [self rootItem] : item;
 
@@ -111,7 +110,7 @@
     return [[self document] itemIsNode: item];
 }
 
-- (int) outlineView: (NSOutlineView *) outlineView numberOfChildrenOfItem: (id) item
+- (NSInteger) outlineView: (NSOutlineView *) outlineView numberOfChildrenOfItem: (id) item
 {
 	FSItem *fsItem = (item == nil) ? [self rootItem] : item;
 	

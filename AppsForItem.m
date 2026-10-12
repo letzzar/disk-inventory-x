@@ -13,7 +13,6 @@
 //
 
 #import "AppsForItem.h"
-#import <OmniFoundation/NSMutableArray-OFExtensions.h>
 #import "NSURL-Extensions.h"
 
 @interface AppsForItem(Private)
@@ -89,7 +88,10 @@
 			}
 		}
 		
-		[_additionalAppURLs sortOnAttribute: @selector(name) usingSelector: @selector(caseInsensitiveCompare:)];
+		[_additionalAppURLs sortUsingComparator: ^NSComparisonResult( NSURL *url1, NSURL *url2 )
+		{
+			return [[url1 name] caseInsensitiveCompare: [url2 name]];
+		}];
 	}
 	
 	return _additionalAppURLs;
@@ -148,7 +150,7 @@
             result = [NSMutableArray arrayWithArray:(NSArray*)outURLs];
             
             // filter out .exe files
-            int i, cnt = [result count];
+            NSUInteger i, cnt = [result count];
             NSURL *url;
             
             for (i=(cnt-1);i>=0;i--)
