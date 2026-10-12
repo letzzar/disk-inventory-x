@@ -19,7 +19,7 @@ jobs:
           path: treemapview-framework
       - name: Build universal app and DMG
         run: disk-inventory-x/make-dmg.sh
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: DiskInventoryX-macos
           path: disk-inventory-x/dist/*.dmg
