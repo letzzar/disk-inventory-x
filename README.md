@@ -19,8 +19,8 @@ This fork ports Disk Inventory X to current macOS:
 Both repositories must be checked out side by side:
 
 ```sh
-git clone <this repository> disk-inventory-x
-git clone <treemapview-framework fork> treemapview-framework   # https://gitlab.com/tderlien/treemapview-framework
+git clone https://github.com/letzzar/disk-inventory-x.git
+git clone https://github.com/letzzar/treemapview-framework.git
 cd disk-inventory-x
 ./make-dmg.sh           # universal Disk Inventory X.app + dist/DiskInventoryX-<version>-macos-arm64-x86_64.dmg
 ```
@@ -30,6 +30,17 @@ Or open `Disk Inventory X.xcworkspace` in Xcode (it builds TreeMapView.framework
 
 The app is ad-hoc signed: on first launch macOS may refuse to open it; use right click → Open,
 or `xattr -dr com.apple.quarantine "/Applications/Disk Inventory X.app"`.
+
+## TreeMapView framework
+
+The treemap is drawn by the **original TreeMapView framework** by Tjark Derlien
+(https://gitlab.com/tderlien/treemapview-framework), used as is and only patched where needed to build
+for Apple Silicon: [letzzar/treemapview-framework](https://github.com/letzzar/treemapview-framework).
+
+The original framework repository does not state a license (only "All rights reserved" notices), while
+Disk Inventory X itself is GPL v3; we believe the author forgot to add the license to the framework.
+**If a restrictive license is finally applied to TreeMapView, the framework will be removed from this
+project and the treemap view rewritten from scratch.**
 
 ## Credits & License
 

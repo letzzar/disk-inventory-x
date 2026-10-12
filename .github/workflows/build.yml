@@ -1,0 +1,43 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          path: disk-inventory-x
+      - uses: actions/checkout@v5
+        with:
+          repository: letzzar/treemapview-framework
+          path: treemapview-framework
+      - name: Build universal app and DMG
+        run: disk-inventory-x/make-dmg.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DiskInventoryX-macos
+          path: disk-inventory-x/dist/*.dmg
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [macos]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v5
+        with:
+          path: dist
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: Disk Inventory X ${{ github.ref_name }}
+          body_path: release-notes/${{ github.ref_name }}.md
+          files: dist/*
